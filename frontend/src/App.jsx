@@ -1,18 +1,17 @@
-// filepath: /C:/Users/ELITEBOOK/OneDrive/Bureau/E-commerce-master/frontend/src/App.jsx
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import ProductList from './components/ProductList';
-import AddProduct from './components/AddProduct';
+import { useState } from "react";
+import ProductForm from "./components/ProductForm";
+import ProductList from "./components/ProductList";
 
-const App = () => {
+function App() {
+  const [refresh, setRefresh] = useState(false);
+
   return (
-    <Router>
-      <Switch>
-        <Route path="/" exact component={ProductList} />
-        <Route path="/add-product" component={AddProduct} />
-      </Switch>
-    </Router>
+    <div className="p-6">
+      <h1 className="text-xl font-bold mb-4">Stock Management</h1>
+      <ProductForm onProductAdded={() => setRefresh(!refresh)} />
+      <ProductList key={refresh} />
+    </div>
   );
-};
+}
 
 export default App;
